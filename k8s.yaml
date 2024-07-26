@@ -18,7 +18,7 @@ data:
   
   
   
-  MONGO_URI: mongodb://mongo/./
+  
 
 ---
 #########################################################
@@ -47,7 +47,7 @@ metadata:
   #  kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: ./.127.0.0.1.nip.io
+  - host: moleculer-demo.127.0.0.1.nip.io
     http:
       paths:
       - path: /
@@ -78,7 +78,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: ./
+        image: moleculer-demo
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -107,7 +107,7 @@ spec:
     spec:
       containers:
       - name: greeter
-        image: ./
+        image: moleculer-demo
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
@@ -115,104 +115,6 @@ spec:
         env:
           - name: SERVICES
             value: greeter
-
----
-#########################################################
-# Products service
-#########################################################
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: products
-spec:
-  selector:
-    matchLabels:
-      app: products
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        app: products
-    spec:
-      containers:
-      - name: products
-        image: ./
-        imagePullPolicy: IfNotPresent
-        envFrom:
-        - configMapRef:
-            name: common-env
-        env:
-          - name: SERVICES
-            value: products
-
----
-#########################################################
-# MongoDB server
-#########################################################
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: mongo
-  labels:
-    app: mongo
-spec:
-  selector:
-    matchLabels:
-      app: mongo
-  replicas: 1
-  serviceName: mongo
-  template:
-    metadata:
-      labels:
-        app: mongo
-    spec:
-      containers:
-        - image: mongo
-          name: mongo
-          ports:
-            - containerPort: 27017
-          resources: {}
-          volumeMounts:
-            - mountPath: /data/db
-              name: mongo-data
-      volumes:
-        - name: mongo-data
-          persistentVolumeClaim:
-            claimName: mongo-data
-
----
-#########################################################
-# Persistent volume for MongoDB
-#########################################################
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongo-data
-  labels:
-    name: mongo-data
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-
----
-#########################################################
-# MongoDB service
-#########################################################
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo
-  labels:
-    app: mongo
-spec:
-  ports:
-    - port: 27017
-      targetPort: 27017
-  selector:
-    app: mongo          
 
 
 ---

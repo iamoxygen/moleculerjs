@@ -1,6 +1,6 @@
 [![Moleculer](https://badgen.net/badge/Powered%20by/Moleculer/0e83cd)](https://moleculer.services)
 
-# ./
+# moleculer-demo
 This is a [Moleculer](https://moleculer.services/)-based microservices project. Generated with the [Moleculer CLI](https://moleculer.services/docs/0.14/moleculer-cli.html).
 
 ## Usage
@@ -13,16 +13,12 @@ In the terminal, try the following commands:
 - `actions` - List all registered service actions.
 - `call greeter.hello` - Call the `greeter.hello` action.
 - `call greeter.welcome --name John` - Call the `greeter.welcome` action with the `name` parameter.
-- `call products.list` - List the products (call the `products.list` action).
+
 
 
 ## Services
 - **api**: API Gateway services
 - **greeter**: Sample service with `hello` and `welcome` actions.
-- **products**: Sample DB service. To use with MongoDB, set `MONGO_URI` environment variables and install MongoDB adapter with `npm i moleculer-db-adapter-mongo`.
-
-## Mixins
-- **db.mixin**: Database access mixin for services. Based on [moleculer-db](https://github.com/moleculerjs/moleculer-db#readme)
 
 
 ## Useful links

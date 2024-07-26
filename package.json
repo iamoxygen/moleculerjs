@@ -1,5 +1,5 @@
 {
-  "name": "./",
+  "name": "moleculer-demo",
   "version": "1.0.0",
   "description": "My Moleculer-based microservices project",
   "scripts": {
@@ -25,11 +25,13 @@
     "moleculer-repl": "^0.7.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "mkdirp": "^3.0.1",
+    "moleculer": "^0.14.26",
+    "moleculer-db": "^0.8.25",
+    "moleculer-db-adapter-mongo": "^0.4.19",
     "moleculer-web": "^0.10.4",
-    "moleculer-db": "^0.8.20",
-    "moleculer-db-adapter-mongo": "^0.4.15",
-    "nats": "^2.7.1",
-    "moleculer": "^0.14.26"
+    "nats": "^2.7.1"
   },
   "engines": {
     "node": ">= 16.x.x"
